@@ -102,26 +102,27 @@
       );
   c. 启动预热引擎的页面
   
-  public class MyApplication extends Application {
-    private FlutterEngine flutterEngine;
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        //预热flutter引擎
-        flutterEngine = new FlutterEngine(this);
-        // Start executing Dart code to pre-warm the FlutterEngine.
-        flutterEngine.getDartExecutor().executeDartEntrypoint(
-                DartExecutor.DartEntrypoint.createDefault()
-        );
-        //预热flutter 引擎的方式
-        // Cache the FlutterEngine to be used by FlutterActivity.
-        FlutterEngineCache
-                .getInstance()
-                .put("my_engine_id", flutterEngine);
-    }
-  }
+        public class MyApplication extends Application {
+          private FlutterEngine flutterEngine;
+          @Override
+          public void onCreate() {
+              super.onCreate();
+              //预热flutter引擎
+              flutterEngine = new FlutterEngine(this);
+              // Start executing Dart code to pre-warm the FlutterEngine.
+              flutterEngine.getDartExecutor().executeDartEntrypoint(
+                      DartExecutor.DartEntrypoint.createDefault()
+              );
+              //预热flutter 引擎的方式
+              // Cache the FlutterEngine to be used by FlutterActivity.
+              FlutterEngineCache
+                      .getInstance()
+                      .put("my_engine_id", flutterEngine);
+          }
+        }
   
   //采用预热引擎的方式，可以加快flutter页面构建时间
+  
         findViewById(R.id.btn_show_engine_flutter).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
